@@ -18,14 +18,14 @@ public class HelloGrpcService implements HelloGrpc {
     }
 
     @Override
-    public Multi<NumberResponse> streamRandomNumbers(NumberRequest request) {
+    public Multi<NumberReply> streamRandomNumbers(NumberRequest request) {
         Random random = new Random();
         return Multi.createFrom()
                 .ticks()
                 .every(Duration.ofSeconds(1))
                 .select()
                 .first(request.getCount())
-                .map(tick -> NumberResponse.newBuilder().setIndex(tick + 1).setValue(random.nextInt(100)).build());
+                .map(tick -> NumberReply.newBuilder().setIndex(tick + 1).setValue(random.nextInt(100)).build());
     }
 
 }

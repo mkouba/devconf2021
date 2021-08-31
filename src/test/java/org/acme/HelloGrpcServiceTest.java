@@ -28,7 +28,7 @@ public class HelloGrpcServiceTest {
 
     @Test
     public void testNumberStream() {
-        Multi<NumberResponse> reply = helloGrpc
+        Multi<NumberReply> reply = helloGrpc
                 .streamRandomNumbers(NumberRequest.newBuilder().setCount(2).build());
         List<Long> values = reply.map(r -> r.getValue()).subscribe().asStream().collect(Collectors.toList());
         assertEquals(2, values.size());
